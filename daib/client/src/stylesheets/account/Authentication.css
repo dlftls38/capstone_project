@@ -1,0 +1,60 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.authentication{
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #191919;
+  text-align: center;
+}
+.authentication h1{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.authentication .input{
+  font-size: 16px;
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 280px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.authentication .input:focus{
+  width: 400px;
+  border-color: #3498db;
+}
+.authentication .button{
+  font-size: 30px;
+  border:0;
+  background: none;
+  margin: 50px 10px auto;
+  width: 240px;
+  height: 70px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-decoration:none
+}
+.authentication .button:hover{
+  background: #2ecc71;
+}
