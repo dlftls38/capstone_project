@@ -3,6 +3,7 @@ var account = require('./account/account');
 var memo = require('./memo/memo');
 var post = require('./post/post');
 var search = require('./search/search');
+var chatbot = require('./chatbot/chatbot');
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/account', account);
 router.use('/memo', memo);
 router.use('/post', post);
 router.use('/search', search);
+router.use('/chatbot', chatbot);
 
 module.exports =  router;

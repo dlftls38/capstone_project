@@ -6,12 +6,13 @@ import { Link, Route } from 'react-router-dom'
 
 import {Nav, NavItem, Navbar, NavDropdown, DropdownItem, Form, FormControl, Button, Row, Col, Image} from 'react-bootstrap';
 
-import {ChatbotBuilder} from '../';
+// import Dashboard from './Dashboard';
+// import Domain from './Domain';
 
 const $ = window.$;
 const Materialize = window.Materialize;
 
-class Home extends React.Component {
+class Trash extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,7 +22,7 @@ class Home extends React.Component {
     handleLogout() {
         this.props.logoutRequest().then(
             () => {
-                 Materialize.toast('Good Bye!', 2000, 'black');
+                 Materialize.toast('Good Bye!', 2000);
 
                  // EMPTIES THE SESSION
                 let loginData = {
@@ -39,20 +40,19 @@ class Home extends React.Component {
         history.push('/');
     }
     componentDidMount() {
-		// console.log("holly shit", document.cookie)
         if (!localStorage.getItem("userInfo")) {
-            // console.log(1);
+            console.log(1);
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit2")
+
         if(!document.cookie){
-            // console.log(0);
+            console.log(0);
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit3")
-		
+
+
         // get cookie by name
         function getCookie(name) {
             var value = "; " + document.cookie;
@@ -87,7 +87,7 @@ class Home extends React.Component {
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit4")
+
         // decode base64 & parse json
         loginData = JSON.parse(atob(loginData));
 
@@ -97,11 +97,9 @@ class Home extends React.Component {
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit5")
         // console.log(5);
         // page refreshed & has a session in cookie,
         // check whether this cookie is valid or not
-		
         this.props.getStatusRequest().then(
             () => {
                 if(!this.props.status.valid) {
@@ -116,7 +114,7 @@ class Home extends React.Component {
                     document.cookie = 'key=' + btoa(JSON.stringify(loginData));
                     // and notify
                     let $toastContent = $('<span style="color: #FFB4BA">Your session is expired, please log in again</span>');
-                    Materialize.toast($toastContent, 4000, 'black');
+                    Materialize.toast($toastContent, 4000);
                     this.goBackToLogin();
                 }
             }
@@ -139,12 +137,76 @@ class Home extends React.Component {
 
         return (
             <div >
-				<div className="center lock">
-					<ul>
-						{ this.props.status.isLoggedIn ? logoutButton : loginButton }
-					</ul>
-				</div>
-                <Route path="/home" component={ChatbotBuilder} />
+                <Row>
+                    <Col className="">
+                        <h2>DAIB Chatbot</h2>
+                        <br></br>
+                        <Image src={require('../../Assets/Images/chatbot.png')} roundedCircle />
+                        <Nav fill variant="tabs" activeKey={this.props.location.pathname} className="flex-column">
+                            <Nav.Item>
+                                <Nav.Link href="/home/dashboard">Dashboard</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/home/domain">Domain</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/home/management">Management</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/home/subscription">Subscription</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        <Navbar bg="dark" variant="dark" >
+                            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                            <Nav className="mr-auto">
+                            <Nav.Link href="#home">Home</Nav.Link>
+                            <Nav.Link href="#features">Features</Nav.Link>
+                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            </Nav>
+                            <Form inline>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-info">Search</Button>
+                            </Form>
+                        </Navbar>
+                        <br />
+                        <Navbar bg="primary" variant="dark">
+                            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                            <Nav className="mr-auto">
+                            <Nav.Link href="#home">Home</Nav.Link>
+                            <Nav.Link href="#features">Features</Nav.Link>
+                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            </Nav>
+                            <Form inline>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-light">Search</Button>
+                            </Form>
+                        </Navbar>
+
+                        <br />
+                        <Navbar bg="light" variant="light">
+                            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                            <Nav className="mr-auto">
+                            <Nav.Link href="#home">Home</Nav.Link>
+                            <Nav.Link href="#features">Features</Nav.Link>
+                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            </Nav>
+                            <Form inline>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-primary">Search</Button>
+                            </Form>
+                        </Navbar>
+                    </Col>
+                    <Col xs={8} className="">
+                        <div className="center lock">
+                            <ul>
+                                { this.props.status.isLoggedIn ? logoutButton : loginButton }
+                            </ul>
+                        </div>
+                        <h1>챗봇 설정</h1>
+                        {/* <Route path="/home/dashboard" component={Dashboard} />
+                        <Route path="/home/domain" component={Domain} /> */}
+                    </Col>
+                </Row>
             </div>
         );
 
@@ -168,4 +230,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Trash);
