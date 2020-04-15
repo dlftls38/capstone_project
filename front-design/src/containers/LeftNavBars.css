@@ -1,0 +1,12 @@
+.leftnavbars {
+    background-color: #aaff00;
+    min-height: 100vh;
+    width:300px;
+    font-size: calc(10px + 2vmin);
+    display: flex;
+    align-self:start;
+    flex-direction: row;
+    position: fixed; top:0;left:0;
+    align-items: center;
+    justify-content: center;
+}

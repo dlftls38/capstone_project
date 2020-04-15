@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "babel-node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "axios": "^0.19.1",
@@ -26,7 +26,9 @@
     "react-timeago": "^4.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^2.1.2"
+    "serialize-javascript": "^2.1.2",
+    "zeromq": "^5.2.0",
+    "zerorpc": "^0.9.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",

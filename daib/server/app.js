@@ -55,4 +55,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//json 통신 test
+app.post("/",function(req,rest,next){
+	return res.json({success:true, msg:"good"});
+})
+
+
 module.exports = app;
