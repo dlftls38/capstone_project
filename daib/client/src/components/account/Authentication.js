@@ -159,6 +159,14 @@ class Authentication extends React.Component {
                 { loginBoxes }
                 <a onClick={this.handleLogin} className='button'>Sign In</a>
                 <Link to="/signup" className='button'>Sign Up</Link>
+				<h2 className="white">
+					<p>
+					</p>
+					<p>
+						이걸로 로그인하셈
+					</p>
+					testid/123456
+				</h2>
             </div>
         );
 

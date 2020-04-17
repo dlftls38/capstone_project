@@ -6,6 +6,9 @@ export default class Sorry extends Component {
       return (
         <div className="center">
 		  <Image src={require('../../Assets/Images/sorry.jpeg')} />
+			<h1>
+				미안하다..  
+			</h1>
         </div>
       )
     }
