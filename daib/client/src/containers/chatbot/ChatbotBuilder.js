@@ -330,7 +330,7 @@ class ChatbotBuilder extends React.Component {
 							</input>
 						</div>
                         <a onClick={this.handleSearchClick}><i className="material-icons black-text large">search</i></a>
-						<select className="browser-default right" style={{width: 200 + 'px'}}  onChange={this.handleKeywordType}>
+						<select className="browser-default right" style={{width: 100 + 'px'}}  onChange={this.handleKeywordType}>
 							<option value="chatbotid" defaultValue>chatbotid</option>
 							<option value="entity">entity</option>
 							<option value="intent">intent</option>
@@ -377,7 +377,7 @@ class ChatbotBuilder extends React.Component {
                         toggleIsChecked={this.props.chatbotIsCheckedToggleRequest}
                     />
                 </div>
-                <div>
+                <div className="center">
                     <PageButtonList 
                         dataTotalSize={this.props.dataTotalSize}
                         onClick={this.handlePageChange}

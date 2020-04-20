@@ -38,6 +38,7 @@ ReactDOM.render(
 	  	<Route path="/sorry" component={Sorry} />
 		<Route path="/confession" component={Confession} />
       </Switch>
+	  
       </main>
     </Router>
     </Provider>,

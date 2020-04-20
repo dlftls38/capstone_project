@@ -7,6 +7,8 @@ import { Link, Route } from 'react-router-dom'
 import {Nav, NavItem, Navbar, NavDropdown, DropdownItem, Form, FormControl, Button, Row, Col, Image} from 'react-bootstrap';
 
 import {ChatbotBuilder} from '../';
+import LeftNavBars from '../../test/LeftNavBars';
+import Tooltips from '../../test/Tooltips';
 
 const $ = window.$;
 const Materialize = window.Materialize;
@@ -145,8 +147,12 @@ class Home extends React.Component {
 					</ul>
 				</div>
                 <Route path="/home" component={ChatbotBuilder} />
+				
+				<LeftNavBars/>
+				<Tooltips/>
             </div>
         );
+		
 
     }
 }
