@@ -58,6 +58,13 @@ a {
 /* wrapper */
 .wrapper {
     margin-top: 20px;
+	flex:1;
+	flex-direction:row
+}
+
+.wrapper .card-layout{
+	display:flex;
+	flex-direction:column;
 }
 
 /* WRITE */
@@ -79,6 +86,19 @@ a {
 
 
 /* Memo */
+
+.memo .card-layout{
+	//display:flex;
+	//align-items:stretch;
+	//align-self:start;
+    //justify-content:flex-start;
+	flex-direction:row;
+}
+
+.memo .card{
+	width:400px;
+	height:600px;
+}
 
 .memo .info {
     font-size: 18px;

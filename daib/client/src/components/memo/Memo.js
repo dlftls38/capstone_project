@@ -118,20 +118,23 @@ class Memo extends React.Component {
         const starStyle = (this.props.data.starred.indexOf(this.props.currentUser) > -1) ? { color: '#ff9980' } : { };
 
         const memoView = (
-            <div className="card">
-                <div className="info">
-                    <Link to={`/home/memo/${this.props.data.writer}`} className="username">{data.writer}</Link> wrote a log · <TimeAgo date={data.date.created}/>
-                    { this.props.data.is_edited ? editedInfo : undefined }
-                    { ownership ? dropDownMenu : undefined }
-                </div>
+			<div className="cardl">
+				<div className="card">
+                	<div className="info">
+                    	<Link to={`/home/memo/${this.props.data.writer}`} className="username">{data.writer}</Link> wrote a log · <TimeAgo date={data.date.created}/>
+                    	{ this.props.data.is_edited ? editedInfo : undefined }
+                    	{ ownership ? dropDownMenu : undefined }
+                	</div>
                 <div className="card-content">
                     {data.contents}
                 </div>
-                <div className="footer">
-                    <i className="material-icons log-footer-icon star icon-button" style={starStyle} onClick={this.handleStar}>star</i>
-                    <span className="star-count">{data.starred.length}</span>
-                </div>
-            </div>
+                	<div className="footer">
+                    	<i className="material-icons log-footer-icon star icon-button" style={starStyle} onClick={this.handleStar}>star</i>
+                    	<span className="star-count">{data.starred.length}</span>
+                	</div>
+            	</div>
+			</div>
+            
         );
 
         const editView = (

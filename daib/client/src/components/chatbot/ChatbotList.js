@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import Chatbot from './Chatbot';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PropTypes from 'prop-types'
@@ -11,12 +11,18 @@ class ChatbotList extends React.Component {
     }
 
     render() {
-
+		const cardLayoutStyle={
+			flexDirection:'row',
+			alignItems:'center'
+		}
+		
         const makingChatbots = chatbot => {
 			let onlymine = chatbot.filter(chatbot => chatbot.userid===this.props.currentUser);
             return onlymine.map((chatbot, i) => {
                 return (
-                    <Chatbot
+					<div style={cardLayoutStyle}>
+					
+					<Chatbot
                         data={chatbot}
                         ownership={ chatbot.userid===this.props.currentUser }
                         key={chatbot._id}
@@ -31,6 +37,8 @@ class ChatbotList extends React.Component {
                         toggleEditMode={this.props.toggleEditMode}
                         toggleIsChecked={this.props.toggleIsChecked}
                     />
+						<button>a button</button>
+                    </div>
                 );
             });
         };

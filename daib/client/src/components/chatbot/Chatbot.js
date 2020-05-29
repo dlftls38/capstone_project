@@ -12,7 +12,7 @@ class Chatbot extends React.Component {
 		this.state = {
 			chatbotid: '',
 			entity: '',
-			intente: '',
+			intent: '',
 			sentence: ''
 		};
   	};     
@@ -23,6 +23,12 @@ class Chatbot extends React.Component {
         $('#dropdown-button-'+this.props.data._id).dropdown({
             belowOrigin: true // Displays dropdown below the button
         });
+		this.setState({
+			chatbotid : this.props.data.chatbotid,
+			entity : this.props.data.entity,
+			intent : this.props.data.intent,
+			sentence : this.props.data.sentence
+		})
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -33,7 +39,7 @@ class Chatbot extends React.Component {
         let next = {
             props: nextProps
         };
-        let update = JSON.stringify(current) !== JSON.stringify(next);
+        let update = JSON.stringify(current) !== JSON.stringify(next) || this.state !== nextState;
         return update;
     }
 
@@ -109,6 +115,7 @@ class Chatbot extends React.Component {
         this.props.onRemove(id, index);
     }
 
+	
     render() {
         
         var { data, ownership } = this.props;
@@ -143,9 +150,10 @@ class Chatbot extends React.Component {
             <span style={{color: '#AAB5BC'}}> · Edited <TimeAgo date={this.props.data.date.edited} live={true}/></span>
         );
 
-
+		
         const postView = (
-            <div className="card">
+			<div className="card-layout">
+				<div className="card">
                 { ownership ? checkBox : undefined }
                 <div className="info">
                     <Link to={`/home/post/${this.props.data.chatbotid}`} className="username">					  	{"Chatbotid : "}{data.chatbotid}
@@ -165,15 +173,17 @@ class Chatbot extends React.Component {
                     Number : {data.number}
                 </div>
                 <div className="card-content">
-                    Entity : {data.entity}
+					{ data.entity!=="answer" ? "Entity : " +data.entity : undefined}
                 </div>
 				<div className="card-content">
                     Intent : {data.intent}
                 </div>
 				<div className="card-content">
-                    Sentence : {data.sentence}
+					{ data.entity=="answer" ? "Answer" : "Sentence"} : {data.sentence}
                 </div>
             </div>
+			</div>
+            
         );
 
         const editView = (
@@ -181,24 +191,20 @@ class Chatbot extends React.Component {
                 <div className="card">
                     <div className="card-content">
                         <textarea
-                            ref={ ref => { this.input = ref; } }
                             className="materialize-textarea"
-                            value={data.chatbotid}
+                            value={this.state.chatbotid}
                             onChange={this.chatbotChatbotIDUpdate}></textarea>
                         <textarea
-                            ref={ ref => { this.input = ref; } }
                             className="materialize-textarea"
-                            value= {data.entity}
+                            value= {this.state.entity}
                             onChange={this.chatbotEntityUpdate}></textarea>
 						<textarea
-                            ref={ ref => { this.input = ref; } }
                             className="materialize-textarea"
-                            value= {data.intent}
+                            value= {this.state.intent}
                             onChange={this.chatbotIntentUpdate}></textarea>
 						<textarea
-                            ref={ ref => { this.input = ref; } }
                             className="materialize-textarea"
-                            value= {data.sentence}
+                            value= {this.state.sentence}
                             onChange={this.chatbotSentenceUpdate}></textarea>
                     </div>
                     <div className="card-action">

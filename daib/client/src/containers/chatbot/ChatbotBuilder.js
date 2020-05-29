@@ -12,6 +12,7 @@ import {
     chatbotDateChangeStartRequest,
     chatbotDateChangeEndRequest,
     chatbotModalToggle,
+	chatbotAnswerModalToggle,
     chatbotRegisterRequest,
     chatbotListRequest,
     chatbotEditRequest,
@@ -21,6 +22,7 @@ import Calendar from 'react-calendar'
 import Modal from 'react-modal';
 import history from '../../history';
 import {Nav, NavItem, Navbar, NavDropdown, DropdownItem, Form, FormControl, Button, Row, Col, Image} from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
 
 const $ = window.$;
 const location = window.location;
@@ -40,6 +42,11 @@ const customStyles = {
     }
   };
 
+const cardLayout={
+	flex:1,
+	flexDirection:'row',
+	alignItems:'center'
+};
 
 class ChatbotBuilder extends React.Component {
 
@@ -49,7 +56,14 @@ class ChatbotBuilder extends React.Component {
         await this.rerender()
 		this.rerender()
     }
-
+	constructor(props) {
+		super(props);
+		this.state = {
+			mode:'',
+			statopen:false,
+			setopen:false,
+		};
+  	};
     loadNewChatbot = () => {
          // CANCEL IF THERE IS A PENDING REQUEST
         if(this.props.listStatus === 'WAITING') {
@@ -262,11 +276,27 @@ class ChatbotBuilder extends React.Component {
 
     openModal = () => {
         this.props.chatbotModalToggle();
+		this.setState({mode:'intent'});
+		console.log(this.state.mode);
       }
+	
+	openAnswerModal=()=>{
+		this.props.chatbotAnswerModalToggle();
+		this.setState({mode:'answer'});
+		console.log(this.state.mode);
+	}
+	
+	openStatModal=()=>{
+		this.setState({statopen:true});
+	}
+	
+	closeStatModal=()=>{
+		this.setState({statopen:false});
+	}
      
     afterOpenModal = () => {
         // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#f00';
+        this.subtitle.style.color = '#000';
     }
     
     closeModal = () => {
@@ -288,14 +318,6 @@ class ChatbotBuilder extends React.Component {
         }
     }
     
-	sorry = () => {
-        history.push('/sorry');
-	}
-	
-	confession = () => {
-        history.push('/confession');
-	}
-
     render() {
         return (
             <div>
@@ -338,9 +360,13 @@ class ChatbotBuilder extends React.Component {
 						</select>
                     </div>
 					<div className="center">
-						<Button onClick={this.openModal} className="btn btn-dark">빌더 만들기</Button>
-						<Button onClick={this.sorry} className="btn btn-dark">빌더 실행하기</Button>
+						<Button onClick={this.openModal} className="btn btn-dark">인텐트 입력</Button>
+						<Button onClick={this.openAnswerModal} className="btn btn-dark">응답 입력</Button>
 						<Button onClick={this.handleRemoveSelectedChatbot} className="btn btn-dark">선택항목 삭제</Button>
+						<Button onClick={this.openStatModal} className="btn btn-dark">프로젝트 통계</Button>
+						<a href="www.google.com"><Button className="btn btn-dark">챗봇 실행하기</Button></a>
+						
+						
 						<Modal
 							isOpen={this.props.chatbotStatus.modalIsOpen}
 							onAfterOpen={this.afterOpenModal}
@@ -348,24 +374,39 @@ class ChatbotBuilder extends React.Component {
 							style={customStyles}
 							contentLabel="Chatbot Register"
 						>   
-							<h2 className = "center" ref={subtitle => this.subtitle = subtitle}>Building Chatbot</h2>
-							<ChatbotWrite 
+							<h2 className = "center" ref={subtitle => this.subtitle = subtitle}>{this.state.mode==='intent'?"엔티티-의도 등록":"엔티티-대답 등록"}</h2>
+							{
+							
+							<ChatbotWrite mode={this.state.mode}
 								onRegister={this.handleRegister}
 							/>
+							}
 						</Modal>
-						<Button onClick={this.confession} className="btn btn-dark">절대 클릭하지 말 것</Button>
+						<Modal
+							isOpen={this.state.statopen}
+							onAfterOpen={this.afterOpenModal}
+							onRequestClose={this.closeStatModal}
+							style={customStyles}
+						>
+							<h2 className = "center" ref={subtitle => this.subtitle = subtitle}>{"챗봇 통계"}</h2>
+							
+							
+							<h3 className="center">헬스케어 - 등록된 엔티티 : 94, 등록된 응답 : 32, 유저 정확도 : 64%</h3>
+							<h3 className="center">게임 - 등록된 엔티티 : 5, 등록된 응답 : 5, 유저 정확도 : 40%</h3>
+							<Button onClick={this.closeStatModal}>닫기</Button>
+						</Modal>
                 	</div>
 				</div>
 				<div>
               </div>
-                <div className="wrapper">
+                <div className="wrapper" style={cardLayout}>
 
 					{/*<ChatbotWrite 
                         onRegister={this.handleRegister}
                     />*/}
-                    
-                    <ChatbotList 
-                        data={this.props.chatbotData} 
+                    <div className="card-layout">
+						<ChatbotList style={cardLayout}
+                        data={this.props.chatbotData}
                         currentUser={this.props.currentUser}
                         onEdit={this.handleEdit}
                         onRemove={this.handleRemove}
@@ -376,6 +417,8 @@ class ChatbotBuilder extends React.Component {
                         toggleEditMode={this.props.chatbotEditModeToggleRequest}
                         toggleIsChecked={this.props.chatbotIsCheckedToggleRequest}
                     />
+					</div>
+                    
                 </div>
                 <div className="center">
                     <PageButtonList 
@@ -427,6 +470,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         chatbotModalToggle: () => {
             return dispatch(chatbotModalToggle());
+        },
+		chatbotAnswerModalToggle: () => {
+            return dispatch(chatbotAnswerModalToggle());
         },
         chatbotRegisterRequest: (number, userid, chatbotid, entity, intent, sentence) => {
             return dispatch(chatbotRegisterRequest(number, userid, chatbotid, entity, intent, sentence));

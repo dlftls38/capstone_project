@@ -1,8 +1,8 @@
 .leftnavbars {
     background-color: #333333;
     min-height: 100vh;
-    width:300px;
-    font-size: calc(10px + 2vmin);
+    width:200px;
+    font-size: calc(4px + 2vmin);
     display: flex;
     align-self:start;
     flex-direction: row;

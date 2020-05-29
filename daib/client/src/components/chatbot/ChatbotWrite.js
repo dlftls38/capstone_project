@@ -6,6 +6,7 @@ class ChatbotWrite extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			mode:props.mode,
 			chatbotid: '',
 			entity: '',
 			intente: '',
@@ -38,8 +39,9 @@ class ChatbotWrite extends React.Component {
     }
 	
     handleRegister = () => {
+		let mode=this.state.mode;
         let chatbotid = this.state.chatbotid;
-        let entity = this.state.entity;
+        let entity = this.state.mode==='intent'?this.state.entity:"answer";
 		let intent = this.state.intent;
 		let sentence = this.state.sentence;
 
@@ -61,13 +63,15 @@ class ChatbotWrite extends React.Component {
                         <textarea className="materialize-textarea" placeholder="Write down your chatbotid"
                         value={this.state.chatbotid}
                         onChange={this.chatbotChatbotIDUpdate}></textarea>
-						<textarea className="materialize-textarea" placeholder="Write down your entity"
+						{this.state.mode==='intent'&&
+						<textarea className="materialize-textarea" placeholder={"Write down your entity"}
                         value={this.state.entity}
                         onChange={this.chatbotEntityUpdate}></textarea>
+						}
 						<textarea className="materialize-textarea" placeholder="Write down your intent"
                         value={this.state.intent}
                         onChange={this.chatbotIntentUpdate}></textarea>
-						<textarea className="materialize-textarea" placeholder="Write down your sentence"
+						<textarea className="materialize-textarea" placeholder={this.state.mode==='intent'?"Write down your sentence":"Write down your answer"}
                         value={this.state.sentence}
                         onChange={this.chatbotSentenceUpdate}></textarea>
                     </div>

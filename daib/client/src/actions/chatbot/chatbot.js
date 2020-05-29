@@ -107,6 +107,12 @@ export function chatbotModalToggle() {
     };
 }
 
+export function chatbotAnswerModalToggle() {
+    return {
+        type: CHATBOT_MODAL_TOGGLE
+    };
+}
+
 
 /* CHATBOT CHATBOT */
 export function chatbotRegisterRequest(number, userid, chatbotid, entity, intent, sentence) {
