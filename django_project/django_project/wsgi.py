@@ -17,7 +17,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_project.settings")
 application = get_wsgi_application()
 
 
-token = 'xoxb-951760360900-983050911556-9Lc76gF0Yjbp8FSz64CqfrWJ'
+token = 'xoxb-951760360900-983050911556-1TZzXI9OX2utzpr6PKylwMZZ'
 slack = Slacker(token)
 
 slack.chat.post_message('#general', '접속되었습니다. ID를 입력해주세요')
