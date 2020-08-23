@@ -148,8 +148,7 @@ class Home extends React.Component {
 				</div>
                 <Route path="/home" component={ChatbotBuilder} />
 				
-				<LeftNavBars/>
-				<Tooltips/>
+				
             </div>
         );
 		

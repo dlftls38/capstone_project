@@ -62,6 +62,8 @@ class ChatbotBuilder extends React.Component {
 			mode:'',
 			statopen:false,
 			setopen:false,
+			healthentitycount:94,
+			healthanswercount:32,
 		};
   	};
     loadNewChatbot = () => {
@@ -84,6 +86,8 @@ class ChatbotBuilder extends React.Component {
     }
 
     handleRegister = (chatbotid, entity, intent, sentence) => {
+		var tmp=Number(this.state.healthentitycount+1);
+		this.setState({healthentitycount:parseInt(tmp)})
         return this.props.chatbotRegisterRequest(this.props.chatbotStatus.number, this.props.currentUser, chatbotid, entity, intent, sentence).then(
             () => {
 				if(this.props.chatbotStatus.modalIsOpen){
@@ -187,6 +191,8 @@ class ChatbotBuilder extends React.Component {
     }
 
     handleRemove = (id, index) => {
+		var tmp=Number(this.state.healthentitycount-1);
+		this.setState({healthentitycount:parseInt(tmp)})
         this.props.chatbotRemoveRequest(id, index, this.props.chatbotStatus.number).then(
             () => {
                 if(this.props.removeStatus.status === "SUCCESS") { 
@@ -360,11 +366,11 @@ class ChatbotBuilder extends React.Component {
 						</select>
                     </div>
 					<div className="center">
-						<Button onClick={this.openModal} className="btn btn-dark">인텐트 입력</Button>
-						<Button onClick={this.openAnswerModal} className="btn btn-dark">응답 입력</Button>
-						<Button onClick={this.handleRemoveSelectedChatbot} className="btn btn-dark">선택항목 삭제</Button>
-						<Button onClick={this.openStatModal} className="btn btn-dark">프로젝트 통계</Button>
-						<a href="www.google.com"><Button className="btn btn-dark">챗봇 실행하기</Button></a>
+						<Button onClick={this.openModal} className="btn btn-dark" style={{marginRight:5}}>인텐트 입력</Button>
+						<Button onClick={this.openAnswerModal} className="btn btn-dark" style={{marginRight:5}}>응답 입력</Button>
+						<Button onClick={this.handleRemoveSelectedChatbot} className="btn btn-dark" style={{marginRight:5}}>선택항목 삭제</Button>
+						<Button onClick={this.openStatModal} className="btn btn-dark" style={{marginRight:5}}>프로젝트 통계</Button>
+						<a href="https://app.slack.com/client/TTZNCALSG/CTMCHRCAW"><Button className="btn btn-dark" style={{marginRight:5}}>챗봇 실행하기</Button></a>
 						
 						
 						<Modal
@@ -391,8 +397,8 @@ class ChatbotBuilder extends React.Component {
 							<h2 className = "center" ref={subtitle => this.subtitle = subtitle}>{"챗봇 통계"}</h2>
 							
 							
-							<h3 className="center">헬스케어 - 등록된 엔티티 : 94, 등록된 응답 : 32, 유저 정확도 : 64%</h3>
-							<h3 className="center">게임 - 등록된 엔티티 : 5, 등록된 응답 : 5, 유저 정확도 : 40%</h3>
+							<h3 className="center">헬스케어 - 등록된 엔티티 : {parseInt( this.state.healthentitycount)}, 등록된 응답 : 32, 유저 정확도 : 64%</h3>
+							<h3 className="center">게임 - 등록된 엔티티 : 5, 등록된 응답 : 5, 유저 정확도 : 100%</h3>
 							<Button onClick={this.closeStatModal}>닫기</Button>
 						</Modal>
                 	</div>

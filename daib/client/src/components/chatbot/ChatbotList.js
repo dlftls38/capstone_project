@@ -3,7 +3,7 @@ import Chatbot from './Chatbot';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PropTypes from 'prop-types'
 
-class ChatbotList extends React.Component {
+class ChatbotList1 extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         let update = JSON.stringify(this.props) !== JSON.stringify(nextProps);
@@ -11,17 +11,12 @@ class ChatbotList extends React.Component {
     }
 
     render() {
-		const cardLayoutStyle={
-			flexDirection:'row',
-			alignItems:'center'
-		}
 		
         const makingChatbots = chatbot => {
 			let onlymine = chatbot.filter(chatbot => chatbot.userid===this.props.currentUser);
             return onlymine.map((chatbot, i) => {
                 return (
-					<div style={cardLayoutStyle}>
-					
+					<div>
 					<Chatbot
                         data={chatbot}
                         ownership={ chatbot.userid===this.props.currentUser }
@@ -37,8 +32,7 @@ class ChatbotList extends React.Component {
                         toggleEditMode={this.props.toggleEditMode}
                         toggleIsChecked={this.props.toggleIsChecked}
                     />
-						<button>a button</button>
-                    </div>
+					</div>
                 );
             });
         };
@@ -56,7 +50,7 @@ class ChatbotList extends React.Component {
     }
 }
 
-ChatbotList.propTypes = {
+ChatbotList1.propTypes = {
     data: PropTypes.array,
     currentUser: PropTypes.string,
     onEdit: PropTypes.func,
@@ -69,7 +63,7 @@ ChatbotList.propTypes = {
     toggleIsChecked: PropTypes.func
 };
 
-ChatbotList.defaultProps = {
+ChatbotList1.defaultProps = {
     data: [],
     currentUser: '',
     onEdit: (id, index, chatbotid, entity, intent, sentence) => {
@@ -90,4 +84,4 @@ ChatbotList.defaultProps = {
     }
 };
 
-export default ChatbotList;
+export default ChatbotList1;

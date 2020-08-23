@@ -9,7 +9,7 @@ import axios from 'axios';
 export function searchMemoAccountRequest(keyword) {
     return (dispatch) => {
 
-        dispatch(search());
+        //dispatch(search());
 
         return axios.get('/api/search/memo/account/' + keyword)
         .then((response) => {

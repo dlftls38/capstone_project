@@ -155,24 +155,17 @@ class Authentication extends React.Component {
 
         const loginView = (
             <div className='authentication'>
-                <h1>DAIB</h1>
+                <h1>DIYBot</h1>
                 { loginBoxes }
                 <a onClick={this.handleLogin} className='button'>Sign In</a>
                 <Link to="/signup" className='button'>Sign Up</Link>
-				<h2 className="white">
-					<p>
-					</p>
-					<p>
-						이걸로 로그인하셈
-					</p>
-					testid/123456
-				</h2>
+				
             </div>
         );
 
         const registerView = (
             <div className='authentication'>
-                <h1>DAIB</h1>
+                <h1>DIYBot</h1>
                 { registerBoxes }
                 <a onClick={this.handleRegister} className='button'>Create</a>
                 <Link to="/" className='button'>Cancel</Link>
