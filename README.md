@@ -1,7 +1,11 @@
 # Capstone Project
 
-my contribution is in daib directory
+대학교 4학년 졸업작품 캡스톤 프로젝트
 
-client part is about React, Redux
+챗봇 빌더
 
-server part is about MongoDB(Mongoose), Express
+Goorm.io에서 작업
+
+Contribution
+- daib/client -> React, Redux
+- daib/server -> MongoDB, Express
