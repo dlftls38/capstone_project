@@ -41,19 +41,16 @@ class Home extends React.Component {
         history.push('/');
     }
     componentDidMount() {
-		// console.log("holly shit", document.cookie)
         if (!localStorage.getItem("userInfo")) {
             // console.log(1);
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit2")
         if(!document.cookie){
             // console.log(0);
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit3")
 		
         // get cookie by name
         function getCookie(name) {
@@ -89,7 +86,6 @@ class Home extends React.Component {
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit4")
         // decode base64 & parse json
         loginData = JSON.parse(atob(loginData));
 
@@ -99,7 +95,6 @@ class Home extends React.Component {
             this.goBackToLogin();
             return;
         }
-		// console.log("holly shit5")
         // console.log(5);
         // page refreshed & has a session in cookie,
         // check whether this cookie is valid or not
